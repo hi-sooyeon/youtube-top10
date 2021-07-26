@@ -43,6 +43,12 @@ const store = createStore({
                 lang = navigator.userLanguage;
             }
             commit('setLang', lang.substring(0, 2));
+        },
+        setRegion({commit}, region) {
+            commit('setRegion', region)
+        },
+        setLang({commit}, lang) {
+            commit('setLang', lang)
         }
     },
     plugins: [

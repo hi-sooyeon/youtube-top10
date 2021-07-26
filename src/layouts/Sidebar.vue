@@ -1,17 +1,16 @@
 <template>
   <div class="flex-shrink-0 p-3 bg-light shadow-lg multi-collapse" id="navbar-toggler-success">
-    <div class="d-flex justify-content-center align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <label>
+    <div class="d-flex flex-column align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+      <label class="col-auto">
         지역 :
-        <select v-model="selectRegion">
+        <select v-model="selectRegion" class="form-select-sm">
           <option v-for="region of regionList" :key="region" :value="region">{{region}}</option>
         </select>
       </label>
-      &emsp;|&emsp;
-      <label>
+      <label class="col-auto">
         언어 :
-        <select v-model="langList">
-          <option>aaaaa</option>
+        <select v-model="selectLang" class="form-select-sm">
+          <option v-for="lang of langList" :key="lang.name" :value="lang.hl">{{lang.name}}</option>
         </select>
       </label>
     </div>
@@ -81,13 +80,15 @@ export default {
     return {
       regionList: [],
       langList: [],
-      selectRegion: this.$store.getters.getRegion
-    };
+      selectRegion: this.$store.getters.getRegion,
+      selectLang: this.$store.getters.getLang
+    }
   },
   setup() {
   }, //컴포지션 API
   created() {
     this.getRegionList();
+    this.getLangList();
   }, //컴포넌트가 생성되면 실행
   mounted() {
   }, //template에 정의된 html 코드가 랜더링된 후 실행
@@ -102,8 +103,26 @@ export default {
       for(let i of res.items) {
         this.regionList.push(i.id);
       }
+    },
+    async getLangList() {
+      const params = {
+        'key': config.googleKey,
+        'part': 'snippet'
+      }
+      const res = await this.$api('https://www.googleapis.com/youtube/v3/i18nLanguages', 'get', params);
+      for(let i of res.items) {
+        this.langList.push(i.snippet);
+      }
     }
   }, //컴포넌트 내에서 사용할 메소드 정의
+  watch: {
+    selectRegion() {
+      this.$store.dispatch('setRegion', this.selectRegion)
+    },
+    selectLang() {
+      this.$store.dispatch('setLang', this.selectLang)
+    }
+  }
 }
 </script>
 
