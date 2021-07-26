@@ -17,56 +17,17 @@
     <ul class="list-unstyled ps-0">
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-          Home
+          Category
         </button>
         <div class="collapse show" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">Overview</a></li>
-            <li><a href="#" class="link-dark rounded">Updates</a></li>
-            <li><a href="#" class="link-dark rounded">Reports</a></li>
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" v-for="category of categoryList" :key="category.snippet.title" ref="categoryUL">
+            <li><a :href="category.id" class="link-dark rounded">{{category.snippet.title}}</a></li>
           </ul>
         </div>
       </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          Dashboard
-        </button>
-        <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">Overview</a></li>
-            <li><a href="#" class="link-dark rounded">Weekly</a></li>
-            <li><a href="#" class="link-dark rounded">Monthly</a></li>
-            <li><a href="#" class="link-dark rounded">Annually</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          Orders
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">New</a></li>
-            <li><a href="#" class="link-dark rounded">Processed</a></li>
-            <li><a href="#" class="link-dark rounded">Shipped</a></li>
-            <li><a href="#" class="link-dark rounded">Returned</a></li>
-          </ul>
-        </div>
-      </li>
+
       <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">New...</a></li>
-            <li><a href="#" class="link-dark rounded">Profile</a></li>
-            <li><a href="#" class="link-dark rounded">Settings</a></li>
-            <li><a href="#" class="link-dark rounded">Sign out</a></li>
-          </ul>
-        </div>
-      </li>
+
     </ul>
   </div>
 </template>
@@ -80,6 +41,7 @@ export default {
     return {
       regionList: [],
       langList: [],
+      categoryList: [],
       selectRegion: this.$store.getters.getRegion,
       selectLang: this.$store.getters.getLang
     }
@@ -89,6 +51,7 @@ export default {
   created() {
     this.getRegionList();
     this.getLangList();
+    this.getCategoryList();
   }, //컴포넌트가 생성되면 실행
   mounted() {
   }, //template에 정의된 html 코드가 랜더링된 후 실행
@@ -113,14 +76,32 @@ export default {
       for(let i of res.items) {
         this.langList.push(i.snippet);
       }
+    },
+    async getCategoryList() {
+      const params = {
+        'key': config.googleKey,
+        'part': 'snippet',
+        'regionCode': this.$store.getters.getRegion,
+        'hl': this.$store.getters.getLang
+      }
+      const res = await this.$api('https://www.googleapis.com/youtube/v3/videoCategories', 'get', params);
+      this.categoryList.splice(0);
+      for(let i of res.items) {
+        if(i.snippet.assignable == true) {
+          this.categoryList.push(i);
+        }
+      }
+      console.log(this.categoryList);
     }
   }, //컴포넌트 내에서 사용할 메소드 정의
   watch: {
     selectRegion() {
       this.$store.dispatch('setRegion', this.selectRegion)
+      this.getCategoryList();
     },
     selectLang() {
       this.$store.dispatch('setLang', this.selectLang)
+      this.getCategoryList();
     }
   }
 }
