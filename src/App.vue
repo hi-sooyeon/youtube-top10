@@ -2,7 +2,7 @@
   <div class="d-flex flex-column">
     <Header />
     <div class="container-fluid">
-      <div class="row d-flex flex-row justify-content-between g-5 w-100 vh-100">
+      <div class="row d-flex flex-row justify-content-between g-5 w-100">
         <Sidebar class="col-sm-2 py-4" ref="Sidebar"/>
         <router-view class="col-sm-10 py-4" />
       </div>

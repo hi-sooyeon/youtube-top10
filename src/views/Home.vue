@@ -4,19 +4,18 @@
     <br>
     langTest : {{langTest}}
     <hr>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Youtube />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Youtube from "@/views/Youtube";
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    Youtube
   },
   inject: ['regionTest', 'langTest']
 }
