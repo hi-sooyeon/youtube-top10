@@ -1,22 +1,18 @@
 <template>
   <div class="home">
-    regionTest : {{regionTest}}
-    <br>
-    langTest : {{langTest}}
-    <hr>
-    <Youtube />
+    <img alt="Vue logo" src="../assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Youtube from "@/views/Youtube";
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-    Youtube
-  },
-  inject: ['regionTest', 'langTest']
+    HelloWorld
+  }
 }
 </script>
