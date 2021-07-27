@@ -1,6 +1,6 @@
 module.exports = {
     publicPath: '/youtube-top10',
-    outputDir: 'dist',
+    outputDir: 'docs',
     chainWebpack: config => {
         config.plugins.delete('prefetch'); // prefetch 삭제
         // prefetch 기능을 삭제해도 Lazy Load 사용 가능
