@@ -1,9 +1,11 @@
 <template>
   <div class="youtube">
     <div class="row">
-      <div class="col-lg-3 col-md-6" :key="i" v-for="(product, i) in list">
+      <div class="col-lg-6 col-md-12" :key="i" v-for="(product, i) in list">
         <div class="mb-4 card">
-          <a v-bind:href="'https://youtu.be/'+ product.id"><img class="card-img-top" v-bind:src="product.snippet.thumbnails.high.url" alt="Card image cap"/></a>
+          <div class="ratio ratio-16x9">
+            <iframe :src="'https://www.youtube.com/embed/' + product.id " allowfullscreen id="ytplayer" type="text/html" frameborder="0"></iframe>
+          </div>
           <div class="card-body">
             <div class="card-title h5">{{ product.snippet.title }}</div>
             <p class="card-text"></p></div>
@@ -13,7 +15,7 @@
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </div>
 </template>
 

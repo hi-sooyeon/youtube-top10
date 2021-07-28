@@ -107,4 +107,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  cursor: pointer;
+  font-size: large;
+}
 </style>
