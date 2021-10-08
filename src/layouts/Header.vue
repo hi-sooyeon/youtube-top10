@@ -3,7 +3,7 @@
   <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
     <div class="container-fluid d-flex justify-content-between align-items-center mx-xxl-5">
       <a class="navbar-brand col-sm-1 ms-xl-1" href="">
-        <img src="https://youtube.com/about/static/svgs/icons/brand-resources/YouTube-logo-full_color_light.svg" class="img-fluid">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAA0VXHyAAAAFUlEQVQ4EWNgGAWjITAaAqMhAAkBAAQQAAG+Y1MiAAAAAElFTkSuQmCC" class="img-fluid"/>
         <span class="text-dark align-top">TOP-10</span>
       </a>
       <button class="navbar-toggler border-0 align-items-end" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
