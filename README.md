@@ -84,3 +84,4 @@ npm run lint
 ```
 <br><br/>
 ## 📸 Site Screenshot
+![screenshot](https://raw.githubusercontent.com/hi-sooyeon/youtube-top10/master/youtube-top10.png)
